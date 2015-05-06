@@ -2,12 +2,51 @@
 
 <template id="container">
   <style>
+    :host {
+      display: block;
+    }
+    
     .activity-container > *:last-child {
       display: none;
     }
     
     .activity-container > *:only-child {
       display: block;
+    }
+    
+    .email {
+      display: flex;
+      padding: 5px;
+      
+      background-color: #fff;
+      border-top: 1px solid #000;
+    }
+    
+    .email:last-child {
+      border-bottom: 1px solid #000;
+    }
+    
+    .subject {
+      font-weight: bold;
+      font-size: 1em;
+      
+      color: #222;
+      
+      max-width: 60%;
+      overflow: hidden;
+    }
+    
+    .subject::after {
+      content: " - ";
+    }
+    
+    .body {
+      font-size: 1em;
+      color: #777;
+      
+      margin-left: 10px;
+      max-width: 40%;
+      overflow: hidden;
     }
   </style>
   
@@ -18,15 +57,10 @@
 </template>
 
 <template id="activity">
-  <style>
-
-  </style>
-
   <article class="email">
     <header class="subject"></header>
     <section class="body"></section>
   </article>
-  
 </template>
 
 <script>
