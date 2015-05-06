@@ -1,0 +1,105 @@
+<script src="//js.pusher.com/3.0.0/pusher.min.js"></script>
+
+<template id="container">
+  <style>
+    .activity-container > *:last-child {
+      display: none;
+    }
+    
+    .activity-container > *:only-child {
+      display: block;
+    }
+  </style>
+  
+  <small class="pusher-status"></small>
+	<div class="activity-container">
+		<div class="waiting-msg">Waiting for activity...</div>
+	</div>
+</template>
+
+<template id="activity">
+  <style>
+
+  </style>
+
+  <article class="email">
+    <header class="subject"></header>
+    <section class="body"></section>
+  </article>
+  
+</template>
+
+<script>
+( function( currentScript ) {
+	
+  var importDoc = currentScript.ownerDocument;
+
+  var pusher,
+      emailChannel;
+      
+  var pusherStateEl,
+      containerEl;
+	
+  var PusherGmailZapActivityStream = Object.create(HTMLElement.prototype);
+  PusherGmailZapActivityStream.createdCallback = function() {
+    var appKey = this.getAttribute('app-key');
+    if(!appKey) {
+      throw new Error('A Pusher application key must be provided via the "app-key" attribute');
+    }
+    
+    var debug = this.getAttribute('debug');
+    if(debug !== null && debug !== 'false') {    
+      Pusher.log = function(msg) {
+        console.log(msg);
+      };
+    }
+    
+    var containerContent = importDoc.querySelector( '#container' ).content;
+    var containerClone = importDoc.importNode( containerContent, true );
+    containerEl = containerClone.querySelector('.activity-container');
+    
+    pusherStateEl = containerClone.querySelector('.pusher-status');
+    
+    this.shadow = this.createShadowRoot();
+    this.shadow.appendChild( containerClone );
+    
+    pusher = new Pusher(appKey);
+    
+    // Basic connection status
+    pusher.connection.bind('state_change', function(state) {
+      pusherStateEl.innerHTML = state.current;
+    });
+    
+    // Gmail updates
+    emailChannel = pusher.subscribe('email');
+    emailChannel.bind('new_email', function(data) {
+      var activityContent = importDoc.querySelector('#activity').content;
+      var activityEl = importDoc.importNode( activityContent, true );
+      
+      var subjectEl = activityEl.querySelector('.subject');
+      subjectEl.innerHTML = escapeHtml(data.subject);
+      
+      var bodyEl = activityEl.querySelector('.body');
+      bodyEl.innerHTML = escapeHtml(data.body);
+      
+      containerEl.insertBefore(activityEl, containerEl.firstChild);
+    });
+  };
+  
+  document.registerElement('pusher-gmail-zap-as', {
+    prototype: PusherGmailZapActivityStream
+  });
+  
+  // Helper functions
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;")
+      .replace(/\//g, "&#x2F;");
+  }
+	
+} )( document._currentScript || document.currentScript );
+</script>
