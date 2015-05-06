@@ -6,6 +6,12 @@
       display: block;
     }
     
+    h1 {
+      font-size: 1.1em;
+      padding-bottom: 10px;
+      margin-bottom: 0;
+    }
+    
     .activity-container > *:last-child {
       display: none;
     }
@@ -22,7 +28,7 @@
       border-top: 1px solid #000;
     }
     
-    .email:last-child {
+    .email:last-of-type {
       border-bottom: 1px solid #000;
     }
     
@@ -32,7 +38,8 @@
       
       color: #222;
       
-      max-width: 60%;
+      white-space: nowrap;
+      max-width: 80%;
       overflow: hidden;
     }
     
@@ -45,15 +52,26 @@
       color: #777;
       
       margin-left: 10px;
-      max-width: 40%;
+      max-width: 80%;
+      white-space: nowrap;
       overflow: hidden;
+    }
+    
+    footer {
+      padding-top: 10px;
     }
   </style>
   
-  <small class="pusher-status"></small>
+  <header>
+    <h1>Pusher Gmail Zap Activity Stream</h1>
+  </header>
 	<div class="activity-container">
 		<div class="waiting-msg">Waiting for activity...</div>
 	</div>
+  <footer>
+    <small class="pusher-status"></small> | 
+    <small><a href="https://github.com/leggetter/pusher-gmail-zap-as">view the source</a></small>
+  </footer>
 </template>
 
 <template id="activity">
