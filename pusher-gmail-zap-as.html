@@ -99,6 +99,8 @@
       throw new Error('A Pusher application key must be provided via the "app-key" attribute');
     }
     
+    var cluster = this.getAttribute('cluster');
+    
     var debug = this.getAttribute('debug');
     if(debug !== null && debug !== 'false') {    
       Pusher.log = function(msg) {
@@ -115,7 +117,7 @@
     this.shadow = this.createShadowRoot();
     this.shadow.appendChild( containerClone );
     
-    pusher = new Pusher(appKey);
+    pusher = new Pusher(appKey, {cluster: cluster});
     
     // Basic connection status
     pusher.connection.bind('state_change', function(state) {
