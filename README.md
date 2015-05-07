@@ -1,6 +1,10 @@
 # Pusher Email Zap Activity Stream
 
-A Web Component created to display an activity stream for the Pusher integration with Zapier. This specifically creates an activity stream based on events it receives with the following characteristics:
+A Web Component created to display an activity stream for the Pusher integration with Zapier.
+
+![Pusher Email Zap Activity Stream Screenshot](assets/screenshot.png)
+
+This specifically creates an activity stream based on events it receives with the following characteristics:
 
 * Events are triggered on a channel named `email`
 * The events are named `new_email`
