@@ -10,6 +10,8 @@ This specifically creates an activity stream based on events it receives with th
 * The events are named `new_email`
 * The event data payload has` `subject` and `body` properties
 
+This Pusher Zapier Integration App that this Web Component uses is in Beta. You are hereby invited to try it out by visiting https://zapier.com/developer/invite/20707/d25cf0a67528ad6e7bccc37cab194c5d/
+
 You can read more about the Pusher Zapier integration here:
 **TODO: update when blog post goes out**
 
