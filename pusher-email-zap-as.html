@@ -63,14 +63,14 @@
   </style>
   
   <header>
-    <h1>Pusher Gmail Zap Activity Stream</h1>
+    <h1>Pusher Email Zap Activity Stream</h1>
   </header>
 	<div class="activity-container">
 		<div class="waiting-msg">Waiting for activity...</div>
 	</div>
   <footer>
     <small class="pusher-status"></small> | 
-    <small><a href="https://github.com/leggetter/pusher-gmail-zap-as">view the source</a></small>
+    <small><a href="https://github.com/leggetter/pusher-email-zap-as">view the source</a></small>
   </footer>
 </template>
 
@@ -92,8 +92,8 @@
   var pusherStateEl,
       containerEl;
 	
-  var PusherGmailZapActivityStream = Object.create(HTMLElement.prototype);
-  PusherGmailZapActivityStream.createdCallback = function() {
+  var PusherEmailZapActivityStream = Object.create(HTMLElement.prototype);
+  PusherEmailZapActivityStream.createdCallback = function() {
     var appKey = this.getAttribute('app-key');
     if(!appKey) {
       throw new Error('A Pusher application key must be provided via the "app-key" attribute');
@@ -124,7 +124,7 @@
       pusherStateEl.innerHTML = state.current;
     });
     
-    // Gmail updates
+    // Email updates
     emailChannel = pusher.subscribe('email');
     emailChannel.bind('new_email', function(data) {
       var activityContent = importDoc.querySelector('#activity').content;
@@ -140,8 +140,8 @@
     });
   };
   
-  document.registerElement('pusher-gmail-zap-as', {
-    prototype: PusherGmailZapActivityStream
+  document.registerElement('pusher-email-zap-as', {
+    prototype: PusherEmailZapActivityStream
   });
   
   // Helper functions

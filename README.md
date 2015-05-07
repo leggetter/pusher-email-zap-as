@@ -1,4 +1,4 @@
-# Pusher Gmail Zap Activity Stream
+# Pusher Email Zap Activity Stream
 
 A Web Component created to display an activity stream for the Pusher integration with Zapier. This specifically creates an activity stream based on events it receives with the following characteristics:
 
@@ -17,13 +17,13 @@ Include the webcomponents.js polyfill
 <script src="//cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.6.1/webcomponents.min.js"></script>
 ```
 
-Link in the Pusher Gmail Zap Activity Stream
+Link in the Pusher Email Zap Activity Stream
 
 ```html
-<link rel="import" href="//leggetter.github.io/pusher-gmail-zap-as/pusher-gmail-zap-as.html" />
+<link rel="import" href="//leggetter.github.io/pusher-email-zap-as/pusher-email-zap-as.html" />
 ```
 
-Use the `pusher-gmail-zap-as` tag with the following attributes:
+Use the `pusher-email-zap-as` tag with the following attributes:
 
 * `app-key` - the Pusher Application key to connect to and through which the events are being triggered
 * `debug` - *optional* log debug information to the browser console
@@ -32,5 +32,5 @@ Use the `pusher-gmail-zap-as` tag with the following attributes:
 Example:
 
 ```html
-<pusher-gmail-zap-as app-key="b9441efbc094b5934835" debug></pusher-gmail-zap-as>
+<pusher-email-zap-as app-key="b9441efbc094b5934835" debug></pusher-email-zap-as>
 ```
